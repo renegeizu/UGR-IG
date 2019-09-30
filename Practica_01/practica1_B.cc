@@ -4,14 +4,14 @@
 #include <ctype.h>
 #include "objetos_B.h"
 
-//const int AXIS_SIZE=5000;
-
 GLfloat Observer_distance, Observer_angle_x, Observer_angle_y;
 GLfloat Window_width, Window_height, Front_plane, Back_plane;
 int UI_window_pos_x = 50, UI_window_pos_y = 50, UI_window_width = 450, UI_window_height = 450;
 
 _piramide piramide(0.85, 1.3);
 _cubo cubo(0.2);
+_tetraedro tetraedro(0.2);
+_rombo rombo(0.85, 1.3);
 
 int modo = 0, figura = 0;
 
@@ -51,30 +51,46 @@ void draw_objects(){
 	switch(modo){
 		case 0: // Modo Puntos
 			if(figura == 0){ // Figura Piramide
-				piramide.draw_puntos(1.0, 0.5, 0.0, 3);
-			}else{ // Figura Cubo
-				cubo.draw_puntos(1.0, 0.5, 0.0, 3);
+				piramide.draw_puntos(0, 0, 0, 5);
+			}else if(figura == 1){ // Figura Cubo
+				cubo.draw_puntos(0, 0, 0, 5);
+			}else if(figura == 2){
+				tetraedro.draw_puntos(0, 0, 0, 5);
+			}else{
+				rombo.draw_puntos(0, 0, 0, 5);
 			}
 			break;
 		case 1: // Modo Lineas
 			if(figura == 0){ // Figura Piramide
-				piramide.draw_aristas(1.0, 0.5, 0.0, 3);
-			}else{ // Figura Cubo
-				cubo.draw_aristas(1.0, 0.5, 0.0, 3);
+				piramide.draw_aristas(0, 0, 1, 3);
+			}else if(figura == 1){ // Figura Cubo
+				cubo.draw_aristas(0, 0, 1, 3);
+			}else if(figura == 2){
+				tetraedro.draw_aristas(0, 0, 1, 3);
+			}else{
+				rombo.draw_aristas(0, 0, 1, 3);
 			}
 			break;
 		case 2: // Modo Relleno
 			if(figura == 0){ // Figura Piramide
-				piramide.draw_solido(1.0, 0.5, 0.0);
-			}else{ // Figura Cubo
-				cubo.draw_solido(1.0, 0.5, 0.0);
+				piramide.draw_solido(0.2, 0, 0.3);
+			}else if(figura == 1){ // Figura Cubo
+				cubo.draw_solido(0.2, 0, 0.3);
+			}else if(figura == 2){
+				tetraedro.draw_solido(0.2, 0, 0.3);
+			}else{
+				rombo.draw_solido(0.2, 0, 0.3);
 			}
 			break;
 		case 3: // Modo Ajedrez
 			if(figura == 0){ // Figura Piramide
-				piramide.draw_solido_ajedrez(1.0, 0.5, 0.0, 0.0, 0.5, 1.0);
-			}else{ // Figura Cubo
-				cubo.draw_solido_ajedrez(1.0, 0.5, 0.0, 0.0, 0.5, 1.0);
+				piramide.draw_solido_ajedrez(0.2, 0.5, 1, 0.2, 0.7, 0.4);
+			}else if(figura == 1){ // Figura Cubo
+				cubo.draw_solido_ajedrez(0.2, 0.5, 1, 0.2, 0.7, 0.4);
+			}else if(figura == 2){
+				tetraedro.draw_solido_ajedrez(0.2, 0.5, 1, 0.2, 0.7, 0.4);
+			}else{
+				rombo.draw_solido_ajedrez(0.2, 0.5, 1, 0.2, 0.7, 0.4);
 			}
 			break;
 	}
@@ -116,6 +132,12 @@ void normal_keys(unsigned char Tecla1, int x, int y){
 			break;
 		case '2': // Figura Cubo
 			figura = 1;
+			break;
+		case '3': // Figura Tetraedro
+			figura = 2;
+			break;
+		case '4': // Figura Rombo
+			figura = 3;
 			break;
 	}
 	draw_scene();
@@ -164,12 +186,12 @@ int main(int argc, char **argv){
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowPosition(UI_window_pos_x, UI_window_pos_y);
 	glutInitWindowSize(UI_window_width, UI_window_height);
-	glutCreateWindow("Práctica 1");
+	glutCreateWindow("Practica 01");
 	glutDisplayFunc(draw_scene);
-    glutReshapeFunc(change_window_size);
-    glutKeyboardFunc(normal_keys);
-    glutSpecialFunc(special_keys);
+ 	glutReshapeFunc(change_window_size);
+	glutKeyboardFunc(normal_keys);
+	glutSpecialFunc(special_keys);
 	initialize();
 	glutMainLoop();
-    return 0;
+	return 0;
 }

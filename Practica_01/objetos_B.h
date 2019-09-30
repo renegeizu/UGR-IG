@@ -48,3 +48,21 @@ class _piramide: public _triangulos3D{
 	public:
 		_piramide(float tam = 0.5, float al = 0.75);
 };
+
+//*************************************************************************
+// _tetraedro
+//*************************************************************************
+
+class _tetraedro: public _triangulos3D{
+	public:
+		_tetraedro(float tam = 0.5);
+};
+
+//*************************************************************************
+// _rombo
+//*************************************************************************
+
+class _rombo: public _triangulos3D{
+	public:
+		_rombo(float tam = 0.5, float al = 0.75);
+};

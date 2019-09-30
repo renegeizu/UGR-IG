@@ -44,7 +44,6 @@ void _triangulos3D::draw_aristas(float r, float g, float b, int grosor){
 void _triangulos3D::draw_solido(float r, float g, float b){
 	int i;
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glLineWidth(grosor);
 	glColor3f(r, g, b);
 	glBegin(GL_TRIANGLES);
 	for(i = 0; i < caras.size(); i++){
@@ -58,7 +57,6 @@ void _triangulos3D::draw_solido(float r, float g, float b){
 void _triangulos3D::draw_solido_ajedrez(float r1, float g1, float b1, float r2, float g2, float b2){
 	int i;
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glLineWidth(grosor);
 	glColor3f(r1, g1, b1);
 	glBegin(GL_TRIANGLES);
 	for(i = 0; i < caras.size(); i++){
@@ -81,12 +79,12 @@ void _triangulos3D::draw_solido_ajedrez(float r1, float g1, float b1, float r2, 
 _cubo::_cubo(float tam){
 	vertices.resize(8);
 	
-	vertices[0].x = tam;		vertices[0].y = tam;		vertices[0].z = tam;
-	vertices[1].x = tam;		vertices[1].y = tam;		vertices[1].z = -tam;
-	vertices[2].x = tam;		vertices[2].y = -tam;		vertices[2].z = tam;
-	vertices[3].x = tam;		vertices[3].y = -tam;		vertices[3].z = -tam;
-	vertices[4].x = -tam;		vertices[4].y = tam;		vertices[4].z = tam;
-	vertices[5].x = -tam;		vertices[5].y = tam;		vertices[5].z = -tam;
+	vertices[0].x = tam;			vertices[0].y = tam;			vertices[0].z = tam;
+	vertices[1].x = tam;			vertices[1].y = tam;			vertices[1].z = -tam;
+	vertices[2].x = tam;			vertices[2].y = -tam;		vertices[2].z = tam;
+	vertices[3].x = tam;			vertices[3].y = -tam;		vertices[3].z = -tam;
+	vertices[4].x = -tam;		vertices[4].y = tam;			vertices[4].z = tam;
+	vertices[5].x = -tam;		vertices[5].y = tam;			vertices[5].z = -tam;
 	vertices[6].x = -tam;		vertices[6].y = -tam;		vertices[6].z = tam;
 	vertices[7].x = -tam;		vertices[7].y = -tam;		vertices[7].z = -tam;
 	
@@ -114,8 +112,8 @@ _piramide::_piramide(float tam, float al){
 	vertices.resize(5); 
 	
 	vertices[0].x = -tam;	vertices[0].y = 0;		vertices[0].z = tam;
-	vertices[1].x = tam;	vertices[1].y = 0;		vertices[1].z = tam;
-	vertices[2].x = tam;	vertices[2].y = 0;		vertices[2].z = -tam;
+	vertices[1].x = tam;		vertices[1].y = 0;		vertices[1].z = tam;
+	vertices[2].x = tam;		vertices[2].y = 0;		vertices[2].z = -tam;
 	vertices[3].x = -tam;	vertices[3].y = 0;		vertices[3].z = -tam;
 	vertices[4].x = 0;		vertices[4].y = al;		vertices[4].z = 0;
 

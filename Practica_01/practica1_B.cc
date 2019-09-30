@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include "objetos_B.h"
 
-const int AXIS_SIZE=5000;
+//const int AXIS_SIZE=5000;
 
 GLfloat Observer_distance, Observer_angle_x, Observer_angle_y;
 GLfloat Window_width, Window_height, Front_plane, Back_plane;
@@ -48,7 +48,7 @@ void draw_axis(){
 }
 
 void draw_objects(){
-	switch(opcion){
+	switch(modo){
 		case 0: // Modo Puntos
 			if(figura == 0){ // Figura Piramide
 				piramide.draw_puntos(1.0, 0.5, 0.0, 3);
@@ -118,6 +118,7 @@ void normal_keys(unsigned char Tecla1, int x, int y){
 			figura = 1;
 			break;
 	}
+	draw_scene();
 }
 
 void special_keys(int Tecla1, int x, int y){

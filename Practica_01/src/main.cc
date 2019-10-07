@@ -1,17 +1,17 @@
-#include "stdlib.h"
-#include "stdio.h"
-#include <GL/glut.h>
 #include <ctype.h>
-#include "objetos_B.h"
+#include <GL/glut.h>
+#include <model_basic.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 GLfloat Observer_distance, Observer_angle_x, Observer_angle_y;
 GLfloat Window_width, Window_height, Front_plane, Back_plane;
 int UI_window_pos_x = 50, UI_window_pos_y = 50, UI_window_width = 450, UI_window_height = 450;
 
-_piramide piramide(0.85, 1.3);
-_cubo cubo(0.2);
-_tetraedro tetraedro(0.2);
-_rombo rombo(0.85, 1.3);
+Piramide piramide(0.85, 1.3);
+Cubo cubo(0.2);
+Tetraedro tetraedro(0.2);
+Diamante rombo(0.85, 1.3);
 
 int modo = 0, figura = 0;
 

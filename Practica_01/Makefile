@@ -1,37 +1,33 @@
-# Practica
-TARGETS = practica1_B
+# Directorios
+BIN		= bin
+SRC		= src
+INCLUDE	= include
 
-# Flags
-CFLAGS = -g -DXWINDOWS -DSHM -I/usr/include -I.
-CXXFLAGS = -g -DXWINDOWS -DSHM -I/usr/include -I.
-LDFLAGS = -lGL -lGLU -lglut -lm
+# Ejecutable Practica
+TARGETS = main
 
 # Compilador
-CC = g++
+CXX	= g++ -Ofast -Wno-write-strings
+CC		= gcc -Ofast
+
+# Flags
+CFLAGS	= -g -DXWINDOWS -DSHM -I/usr/include -I$(INCLUDE) - Wno-deprecated
+CXXFLAGS	= -g -DXWINDOWS -DSHM -I/usr/include -I$(INCLUDE) -Wno-deprecated
+LDFLAGS	= -lGL -lGLU -lglut -lm
 
 # Ordenes Compilacion
-default : $(TARGETS)
+all: clean $(TARGETS)
 
-$(TARGETS) : objetos_B.o practica1_B.o
-	$(CC) -o $@ $(CXXFLAGS) objetos_B.o practica1_B.o $(LDFLAGS)
+$(TARGETS):
+	$(CXX) -o $(BIN)/$@ $(SRC)/$@.cc $(CXXFLAGS) $(SRC)/puntos3D.cpp $(SRC)/triangulos3D.cpp $(SRC)/model_basic.cpp $(LDFLAGS)
 
 # Limpiador
 
 clean:
-	rm -f *.o
-	rm -f $(TARGETS)
-
-redo:
-	touch *.cc
-	make
-
-superclean:
-	rm -f *.o
-	rm *~
-	rm -f $(TARGETS)
+	rm -f $(BIN)/main
+	rm -f *.tgz
 
 tgz:
-	rm -f *.o
-	rm *~
-	rm -f $(TARGETS)
+	rm -f $(BIN)/main
+	rm -f *.tgz
 	tar -zcvf $(TARGETS).tgz *

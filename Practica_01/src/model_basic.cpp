@@ -1,82 +1,6 @@
-#include "objetos_B.h"
+#include <model_basic.h>
 
-//*************************************************************************
-// _puntos3D
-//*************************************************************************
-
-_puntos3D::_puntos3D(){
-	
-}
-
-void _puntos3D::draw_puntos(float r, float g, float b, int grosor){
-	int i;
-	glPointSize(grosor);
-	glColor3f(r, g, b);
-	glBegin(GL_POINTS);
-	for(i = 0; i < vertices.size(); i++){
-		glVertex3fv((GLfloat *) &vertices[i]);
-	}
-	glEnd();
-}
-
-//*************************************************************************
-// _triangulos3D
-//*************************************************************************
-
-_triangulos3D::_triangulos3D(){
-	
-}
-
-void _triangulos3D::draw_aristas(float r, float g, float b, int grosor){
-	int i;
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glLineWidth(grosor);
-	glColor3f(r, g, b);
-	glBegin(GL_TRIANGLES);
-	for(i = 0; i < caras.size(); i++){
-		glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
-		glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
-		glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
-	}
-	glEnd();
-}
-
-void _triangulos3D::draw_solido(float r, float g, float b){
-	int i;
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glColor3f(r, g, b);
-	glBegin(GL_TRIANGLES);
-	for(i = 0; i < caras.size(); i++){
-		glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
-		glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
-		glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
-	}
-	glEnd();
-}
-
-void _triangulos3D::draw_solido_ajedrez(float r1, float g1, float b1, float r2, float g2, float b2){
-	int i;
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glColor3f(r1, g1, b1);
-	glBegin(GL_TRIANGLES);
-	for(i = 0; i < caras.size(); i++){
-		if(i % 2 == 0){
-			glColor3f(r1, g1, b1);
-		}else{
-			glColor3f(r2, g2, b2);
-		}
-		glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
-		glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
-		glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
-	}
-	glEnd();
-}
-
-//*************************************************************************
-// _cubo
-//*************************************************************************
-
-_cubo::_cubo(float tam){
+Cubo::Cubo(float tam){
 	vertices.resize(8);
 	
 	vertices[0].x = tam;			vertices[0].y = tam;			vertices[0].z = tam;
@@ -104,11 +28,7 @@ _cubo::_cubo(float tam){
 	caras[11]._0 = 3;			caras[11]._1 = 2;			caras[11]._2 = 6;
 }
 
-//*************************************************************************
-// _piramide
-//*************************************************************************
-
-_piramide::_piramide(float tam, float al){
+Piramide::Piramide(float tam, float al){
 	vertices.resize(5); 
 	
 	vertices[0].x = -tam;	vertices[0].y = 0;		vertices[0].z = tam;
@@ -127,11 +47,7 @@ _piramide::_piramide(float tam, float al){
 	caras[5]._0 = 3;		caras[5]._1 = 2;		caras[5]._2 = 1;
 }
 
-//*************************************************************************
-// _tetraedro
-//*************************************************************************
-
-_tetraedro::_tetraedro(float tam){
+Tetraedro::Tetraedro(float tam){
 	vertices.resize(4); 
 	
 	vertices[0].x = -tam;	vertices[0].y = -tam;		vertices[0].z = tam;
@@ -147,11 +63,7 @@ _tetraedro::_tetraedro(float tam){
 	caras[3]._0 = 0;		caras[3]._1 = 3;		caras[3]._2 = 1;
 }
 
-//*************************************************************************
-// _rombo
-//*************************************************************************
-
-_rombo::_rombo(float tam, float al){
+Diamante::Diamante(float tam, float al){
 	vertices.resize(6); 
 	
 	vertices[0].x = -tam;	vertices[0].y = 0;		vertices[0].z = tam;

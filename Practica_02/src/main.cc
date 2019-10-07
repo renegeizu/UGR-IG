@@ -67,7 +67,7 @@ void draw_objects(){
 			ply.draw(modo, 1.0, 0.6, 0.0, 0.0, 1.0, 0.3, 2);
 			break;
 		case ROTACION:
-			rotacion.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
+			rotacion.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
 	}
 }

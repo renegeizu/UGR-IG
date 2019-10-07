@@ -57,6 +57,7 @@ _ejecucion(){
 	echo -e "\n${color}Ejecucion Finalizada${nocolor}"
 }
 
+# Menu de la Aplicacion
 _mostrar_menu(){
 	clear
 	echo -e "${menu}~~~~~~~~~~~~~~~~~~~~~~~${nocolor}"
@@ -71,6 +72,7 @@ _mostrar_menu(){
 	echo -e "${menu}~~~~~~~~~~~~~~~~~~~~~~~${nocolor}"
 }
 
+# Menu de los Modelos PLY
 _menu_ply(){
 	clear
 	echo -e "${menu}~~~~~~~~~~~~~~~~~~~~~~~${nocolor}"
@@ -86,6 +88,7 @@ _menu_ply(){
 	echo -e "${menu}~~~~~~~~~~~~~~~~~~~~~~~${nocolor}"
 }
 
+# Escoger PLY
 _opcion_ply(){
 	local opcion
 	read -p "Elige la Opcion (1-7): " opcion
@@ -101,6 +104,7 @@ _opcion_ply(){
 	esac
 }
 
+# Escoger Aplicacion
 _leer_opcion(){
 	local opcion
 	read -p "Elige la Opcion (1-6): " opcion

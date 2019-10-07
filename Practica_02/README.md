@@ -25,3 +25,6 @@ Opciones
     Tecla 4: Activar cilindro
     Tecla 5: Activar esfera
     Tecla 6: Activar objeto PLY cargado
+    Tecla 7: Activar tetraedro
+    Tecla 8: Activar diamante
+    Tecla 9: Activar peon

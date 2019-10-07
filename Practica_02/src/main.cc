@@ -8,7 +8,7 @@
 
 using namespace std;
 
-typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, ROTACION} _tipo_objeto;
+typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, CONO, PEON, ESFERA, CILINDRO, TETRAEDRO, DIAMANTE} _tipo_objeto;
 _tipo_objeto t_objeto = CUBO;
 _modo modo = POINTS;
 
@@ -16,10 +16,16 @@ GLfloat Observer_distance, Observer_angle_x, Observer_angle_y;
 GLfloat Size_x, Size_y, Front_plane, Back_plane;
 int Window_x = 50, Window_y = 50, Window_width = 450, Window_high = 450;
 
-Cubo cubo;
 Piramide piramide(0.85, 1.3);
+Cubo cubo(0.2);
+Tetraedro tetraedro(0.2);
+Diamante diamante(0.85, 1.3);
 ModelPly ply;
-Revolution rotacion;
+Cilindro cilindro;
+Cono cono;
+Peon peon;
+Esfera esfera;
+Revolution revolution = cilindro;
 
 void clean_window(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -66,8 +72,27 @@ void draw_objects(){
 		case OBJETO_PLY:
 			ply.draw(modo, 1.0, 0.6, 0.0, 0.0, 1.0, 0.3, 2);
 			break;
-		case ROTACION:
-			rotacion.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+		case TETRAEDRO:
+			tetraedro.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case DIAMANTE:
+			diamante.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case CONO:
+			revolution = cono;
+			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case CILINDRO:
+			revolution = cilindro;
+			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case PEON:
+			revolution = peon;
+			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case ESFERA:
+			revolution = esfera;
+			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
 	}
 }
@@ -93,29 +118,44 @@ void normal_key(unsigned char Tecla1, int x, int y){
 	switch(toupper(Tecla1)){
 		case 'Q':
 			exit(0);
-		case '1':
+		case 'P':
 			modo = POINTS;
 			break;
-		case '2':
+		case 'L':
 			modo = EDGES;
 			break;
-		case '3':
+		case 'F':
 			modo = SOLID;
 			break;
-		case '4':
+		case 'C':
 			modo = SOLID_CHESS;
 			break;
-		case 'P':
+		case '1':
 			t_objeto = PIRAMIDE;
 			break;
-		case 'C':
+		case '2':
 			t_objeto = CUBO;
 			break;
-		case 'O':
+		case '3':
+			t_objeto = CONO;
+			break;
+		case '4':
+			t_objeto = CILINDRO;
+			break;
+		case '5':
+			t_objeto = ESFERA;
+			break;
+		case '6':
 			t_objeto = OBJETO_PLY;
 			break;
-		case 'R':
-			t_objeto = ROTACION;
+		case '7':
+			t_objeto = TETRAEDRO;
+			break;
+		case '8':
+			t_objeto = DIAMANTE;
+			break;
+		case '9':
+			t_objeto = PEON;
 			break;
 	}
 	glutPostRedisplay();
@@ -160,22 +200,11 @@ void initialize(void){
 }
 
 int main(int argc, char *argv[]){
-	vector<_vertex3f> perfil2;
-	_vertex3f aux;
-	aux.x = 1.0;
-	aux.y = -1.0;
-	aux.z = 0.0;
-	perfil2.push_back(aux);
-	aux.x = 1.0;
-	aux.y = 1.0;
-	aux.z = 0.0;
-	perfil2.push_back(aux);
-	rotacion.parametros(perfil2, 6);
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowPosition(Window_x, Window_y);
 	glutInitWindowSize(Window_width, Window_high);
-	glutCreateWindow("PRACTICA - 2");
+	glutCreateWindow("Practica 02");
 	glutDisplayFunc(draw);
 	glutReshapeFunc(change_window_size);
 	glutKeyboardFunc(normal_key);

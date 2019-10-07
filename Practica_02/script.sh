@@ -63,22 +63,54 @@ _mostrar_menu(){
 	echo -e "${menu}~~~~~~~ Opciones ~~~~~~${nocolor}"
 	echo -e "${menu}~~~~~~~~~~~~~~~~~~~~~~~${nocolor}"
 	echo -e "${menu}1. Compilar${nocolor}"
-	echo -e "${menu}2. Compilar y Ejecutar${nocolor}"
-	echo -e "${menu}3. Comprimir${nocolor}"
-	echo -e "${menu}4. Limpiar${nocolor}"
-	echo -e "${menu}5. Salir${nocolor}"
+	echo -e "${menu}2. Compilar y Ejecutar (PLY Predefinido)${nocolor}"
+	echo -e "${menu}3. Compilar y Ejecutar (Elegir PLY)${nocolor}"
+	echo -e "${menu}4. Comprimir${nocolor}"
+	echo -e "${menu}5. Limpiar${nocolor}"
+	echo -e "${menu}6. Salir${nocolor}"
 	echo -e "${menu}~~~~~~~~~~~~~~~~~~~~~~~${nocolor}"
+}
+
+_menu_ply(){
+	clear
+	echo -e "${menu}~~~~~~~~~~~~~~~~~~~~~~~${nocolor}"
+	echo -e "${menu}~~~~~~~ Menu PLY ~~~~~~${nocolor}"
+	echo -e "${menu}~~~~~~~~~~~~~~~~~~~~~~~${nocolor}"
+	echo -e "${menu}1. Airplane${nocolor}"
+	echo -e "${menu}2. Beethoven${nocolor}"
+	echo -e "${menu}3. Big Porsche${nocolor}"
+	echo -e "${menu}4. Big Spider${nocolor}"
+	echo -e "${menu}5. F16${nocolor}"
+	echo -e "${menu}6. Galleon${nocolor}"
+	echo -e "${menu}7. Hydrant${nocolor}"
+	echo -e "${menu}~~~~~~~~~~~~~~~~~~~~~~~${nocolor}"
+}
+
+_opcion_ply(){
+	local opcion
+	read -p "Elige la Opcion (1-7): " opcion
+	case $opcion in
+		1) clear; data=$(pwd)/data/airplane; exit 0;;
+		2) clear; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
+		3) clear; data=$(pwd)/data/big_porsche; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
+		4) clear; data=$(pwd)/data/big_spider; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
+		5) clear; data=$(pwd)/data/f16; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
+		6) clear; data=$(pwd)/data/galleon; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
+		7) clear; data=$(pwd)/data/hydrant; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
+		*) clear; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
+	esac
 }
 
 _leer_opcion(){
 	local opcion
-	read -p "Elige la Opcion (1-5): " opcion
+	read -p "Elige la Opcion (1-6): " opcion
 	case $opcion in
 		1) clear; _directorios_creacion; _directorios_limpieza; _compilar; exit 0;;
 		2) clear; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
-		3) clear; _directorios_creacion; _directorios_limpieza; _empaquetar; exit 0;;
-		4) clear; _directorios_creacion; _directorios_limpieza; exit 0;;
-		5) clear; exit 0;;
+		3) clear; _menu_ply; _opcion_ply; exit 0;;
+		4) clear; _directorios_creacion; _directorios_limpieza; _empaquetar; exit 0;;
+		5) clear; _directorios_creacion; _directorios_limpieza; exit 0;;
+		6) clear; exit 0;;
 		*) echo -e "\n${error}Error! Introduce una Opcion Valida${nocolor}" && sleep 1
 	esac
 }

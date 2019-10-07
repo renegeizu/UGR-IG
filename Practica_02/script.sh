@@ -4,6 +4,7 @@
 
 # Guardamos los directorios necesarios
 bin=$(pwd)/bin
+data=$(pwd)/data/beethoven
 
 # Colores para los mensajes por terminal
 nocolor='\033[0m'
@@ -52,8 +53,8 @@ _empaquetar(){
 _ejecucion(){
 	#Ejecucion del programa
 	echo -e "\n${color}Ejecutando...\n${nocolor}"
-	$bin/main &
-	echo -e "${color}Ejecucion Independiente Finalizada${nocolor}"
+	$bin/main $data
+	echo -e "\n${color}Ejecucion Finalizada${nocolor}"
 }
 
 _mostrar_menu(){

@@ -1,28 +1,34 @@
 #include <ctype.h>
 #include <GL/glut.h>
 #include <model_basic.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <model_ply.h>
+#include <model_revolution.h>
+#include <math.h>
+#include <vector>
+
+using namespace std;
+
+typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, ROTACION} _tipo_objeto;
+_tipo_objeto t_objeto = CUBO;
+_modo modo = POINTS;
 
 GLfloat Observer_distance, Observer_angle_x, Observer_angle_y;
-GLfloat Window_width, Window_height, Front_plane, Back_plane;
-int UI_window_pos_x = 50, UI_window_pos_y = 50, UI_window_width = 450, UI_window_height = 450;
+GLfloat Size_x, Size_y, Front_plane, Back_plane;
+int Window_x = 50, Window_y = 50, Window_width = 450, Window_high = 450;
 
+Cubo cubo;
 Piramide piramide(0.85, 1.3);
-Cubo cubo(0.2);
-Tetraedro tetraedro(0.2);
-Diamante rombo(0.85, 1.3);
+ModelPly ply;
+Revolution rotacion;
 
-int modo = 0, figura = 0;
-
-void clear_window(){
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+void clean_window(){
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void change_projection(){
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glFrustum(-Window_width, Window_width, -Window_height, Window_height, Front_plane, Back_plane);
+	glFrustum(-Size_x, Size_x, -Size_y, Size_y, Front_plane, Back_plane);
 }
 
 void change_observer(){
@@ -34,70 +40,40 @@ void change_observer(){
 }
 
 void draw_axis(){
+	glDisable(GL_LIGHTING);
+	glLineWidth(2);
 	glBegin(GL_LINES);
-		glColor3f(1,0,0);
-		glVertex3f(-AXIS_SIZE, 0, 0);
-		glVertex3f(AXIS_SIZE, 0, 0);
-		glColor3f(0, 1, 0);
-		glVertex3f(0, -AXIS_SIZE, 0);
-		glVertex3f(0, AXIS_SIZE, 0);
-		glColor3f(0, 0, 1);
-		glVertex3f(0, 0, -AXIS_SIZE);
-		glVertex3f(0, 0, AXIS_SIZE);
+	glColor3f(1, 0, 0);
+	glVertex3f(-AXIS_SIZE, 0, 0);
+	glVertex3f(AXIS_SIZE, 0, 0);
+	glColor3f(0, 1, 0);
+	glVertex3f(0, -AXIS_SIZE, 0);
+	glVertex3f(0, AXIS_SIZE, 0);
+	glColor3f(0, 0, 1);
+	glVertex3f(0, 0, -AXIS_SIZE);
+	glVertex3f(0, 0, AXIS_SIZE);
 	glEnd();
 }
 
 void draw_objects(){
-	switch(modo){
-		case 0: // Modo Puntos
-			if(figura == 0){ // Figura Piramide
-				piramide.draw_puntos(0, 0, 0, 5);
-			}else if(figura == 1){ // Figura Cubo
-				cubo.draw_puntos(0, 0, 0, 5);
-			}else if(figura == 2){
-				tetraedro.draw_puntos(0, 0, 0, 5);
-			}else{
-				rombo.draw_puntos(0, 0, 0, 5);
-			}
+	switch (t_objeto){
+		case CUBO:
+			cubo.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
 			break;
-		case 1: // Modo Lineas
-			if(figura == 0){ // Figura Piramide
-				piramide.draw_aristas(0, 0, 1, 3);
-			}else if(figura == 1){ // Figura Cubo
-				cubo.draw_aristas(0, 0, 1, 3);
-			}else if(figura == 2){
-				tetraedro.draw_aristas(0, 0, 1, 3);
-			}else{
-				rombo.draw_aristas(0, 0, 1, 3);
-			}
+		case PIRAMIDE:
+			piramide.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
 			break;
-		case 2: // Modo Relleno
-			if(figura == 0){ // Figura Piramide
-				piramide.draw_solido(0.2, 0, 0.3);
-			}else if(figura == 1){ // Figura Cubo
-				cubo.draw_solido(0.2, 0, 0.3);
-			}else if(figura == 2){
-				tetraedro.draw_solido(0.2, 0, 0.3);
-			}else{
-				rombo.draw_solido(0.2, 0, 0.3);
-			}
+		case OBJETO_PLY:
+			ply.draw(modo, 1.0, 0.6, 0.0, 0.0, 1.0, 0.3, 2);
 			break;
-		case 3: // Modo Ajedrez
-			if(figura == 0){ // Figura Piramide
-				piramide.draw_solido_ajedrez(0.2, 0.5, 1, 0.2, 0.7, 0.4);
-			}else if(figura == 1){ // Figura Cubo
-				cubo.draw_solido_ajedrez(0.2, 0.5, 1, 0.2, 0.7, 0.4);
-			}else if(figura == 2){
-				tetraedro.draw_solido_ajedrez(0.2, 0.5, 1, 0.2, 0.7, 0.4);
-			}else{
-				rombo.draw_solido_ajedrez(0.2, 0.5, 1, 0.2, 0.7, 0.4);
-			}
+		case ROTACION:
+			rotacion.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
 			break;
 	}
 }
 
-void draw_scene(void){
-	clear_window();
+void draw(void){
+	clean_window();
 	change_observer();
 	draw_axis();
 	draw_objects();
@@ -105,45 +81,47 @@ void draw_scene(void){
 }
 
 void change_window_size(int Ancho1, int Alto1){
+	float Aspect_ratio;
+	Aspect_ratio = (float)Alto1 / (float)Ancho1;
+	Size_y = Size_x * Aspect_ratio;
 	change_projection();
 	glViewport(0, 0, Ancho1, Alto1);
 	glutPostRedisplay();
 }
 
-void normal_keys(unsigned char Tecla1, int x, int y){
+void normal_key(unsigned char Tecla1, int x, int y){
 	switch(toupper(Tecla1)){
 		case 'Q':
 			exit(0);
+		case '1':
+			modo = POINTS;
+			break;
+		case '2':
+			modo = EDGES;
+			break;
+		case '3':
+			modo = SOLID;
+			break;
+		case '4':
+			modo = SOLID_CHESS;
 			break;
 		case 'P':
-			modo = 0; // Modo Puntos
+			t_objeto = PIRAMIDE;
 			break;
-		case 'L': // Modo Lineas
-			modo = 1;
+		case 'C':
+			t_objeto = CUBO;
 			break;
-		case 'F': // Modo Relleno
-			modo = 2;
+		case 'O':
+			t_objeto = OBJETO_PLY;
 			break;
-		case 'C': // Modo Ajedrez
-			modo = 3;
-			break;
-		case '1': // Figura Piramide
-			figura = 0;
-			break;
-		case '2': // Figura Cubo
-			figura = 1;
-			break;
-		case '3': // Figura Tetraedro
-			figura = 2;
-			break;
-		case '4': // Figura Rombo
-			figura = 3;
+		case 'R':
+			t_objeto = ROTACION;
 			break;
 	}
-	draw_scene();
+	glutPostRedisplay();
 }
 
-void special_keys(int Tecla1, int x, int y){
+void special_key(int Tecla1, int x, int y){
 	switch (Tecla1){
 		case GLUT_KEY_LEFT:
 			Observer_angle_y--;
@@ -168,30 +146,42 @@ void special_keys(int Tecla1, int x, int y){
 }
 
 void initialize(void){
-	Window_width = .5;
-	Window_height = .5;
+	Size_x = 0.5;
+	Size_y = 0.5;
 	Front_plane = 1;
 	Back_plane = 1000;
-	Observer_distance = 3*Front_plane;
+	Observer_distance = 4 * Front_plane;
 	Observer_angle_x = 0;
 	Observer_angle_y = 0;
 	glClearColor(1, 1, 1, 1);
 	glEnable(GL_DEPTH_TEST);
 	change_projection();
-	glViewport(0, 0, UI_window_width, UI_window_height);
+	glViewport(0, 0, Window_width, Window_high);
 }
 
-int main(int argc, char **argv){
+int main(int argc, char *argv[]){
+	vector<_vertex3f> perfil2;
+	_vertex3f aux;
+	aux.x = 1.0;
+	aux.y = -1.0;
+	aux.z = 0.0;
+	perfil2.push_back(aux);
+	aux.x = 1.0;
+	aux.y = 1.0;
+	aux.z = 0.0;
+	perfil2.push_back(aux);
+	rotacion.parametros(perfil2, 6);
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowPosition(UI_window_pos_x, UI_window_pos_y);
-	glutInitWindowSize(UI_window_width, UI_window_height);
-	glutCreateWindow("Practica 01");
-	glutDisplayFunc(draw_scene);
- 	glutReshapeFunc(change_window_size);
-	glutKeyboardFunc(normal_keys);
-	glutSpecialFunc(special_keys);
+	glutInitWindowPosition(Window_x, Window_y);
+	glutInitWindowSize(Window_width, Window_high);
+	glutCreateWindow("PRACTICA - 2");
+	glutDisplayFunc(draw);
+	glutReshapeFunc(change_window_size);
+	glutKeyboardFunc(normal_key);
+	glutSpecialFunc(special_key);
 	initialize();
+	ply.parametros(argv[1]);
 	glutMainLoop();
 	return 0;
 }

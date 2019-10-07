@@ -11,7 +11,7 @@ int UI_window_pos_x = 50, UI_window_pos_y = 50, UI_window_width = 450, UI_window
 Piramide piramide(0.85, 1.3);
 Cubo cubo(0.2);
 Tetraedro tetraedro(0.2);
-Diamante rombo(0.85, 1.3);
+Diamante diamante(0.85, 1.3);
 
 int modo = 0, figura = 0;
 
@@ -57,7 +57,7 @@ void draw_objects(){
 			}else if(figura == 2){
 				tetraedro.draw_puntos(0, 0, 0, 5);
 			}else{
-				rombo.draw_puntos(0, 0, 0, 5);
+				diamante.draw_puntos(0, 0, 0, 5);
 			}
 			break;
 		case 1: // Modo Lineas
@@ -68,7 +68,7 @@ void draw_objects(){
 			}else if(figura == 2){
 				tetraedro.draw_aristas(0, 0, 1, 3);
 			}else{
-				rombo.draw_aristas(0, 0, 1, 3);
+				diamante.draw_aristas(0, 0, 1, 3);
 			}
 			break;
 		case 2: // Modo Relleno
@@ -79,7 +79,7 @@ void draw_objects(){
 			}else if(figura == 2){
 				tetraedro.draw_solido(0.2, 0, 0.3);
 			}else{
-				rombo.draw_solido(0.2, 0, 0.3);
+				diamante.draw_solido(0.2, 0, 0.3);
 			}
 			break;
 		case 3: // Modo Ajedrez
@@ -90,7 +90,7 @@ void draw_objects(){
 			}else if(figura == 2){
 				tetraedro.draw_solido_ajedrez(0.2, 0.5, 1, 0.2, 0.7, 0.4);
 			}else{
-				rombo.draw_solido_ajedrez(0.2, 0.5, 1, 0.2, 0.7, 0.4);
+				diamante.draw_solido_ajedrez(0.2, 0.5, 1, 0.2, 0.7, 0.4);
 			}
 			break;
 	}
@@ -136,7 +136,7 @@ void normal_keys(unsigned char Tecla1, int x, int y){
 		case '3': // Figura Tetraedro
 			figura = 2;
 			break;
-		case '4': // Figura Rombo
+		case '4': // Figura Diamante
 			figura = 3;
 			break;
 	}

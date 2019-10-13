@@ -8,7 +8,7 @@
 
 using namespace std;
 
-typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, CONO, PEON, ESFERA, CILINDRO, TETRAEDRO, DIAMANTE} _tipo_objeto;
+typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, CONO, PEON, ESFERA, CILINDRO, TETRAEDRO, DIAMANTE, TUBO} _tipo_objeto;
 _tipo_objeto t_objeto = CUBO;
 _modo modo = POINTS;
 
@@ -25,6 +25,7 @@ Cilindro cilindro;
 Cono cono;
 Peon peon;
 Esfera esfera;
+Tubo tubo;
 Revolution revolution = cilindro;
 
 void clean_window(){
@@ -94,6 +95,10 @@ void draw_objects(){
 			revolution = esfera;
 			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
+		case TUBO:
+			revolution = tubo;
+			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
 	}
 }
 
@@ -156,6 +161,9 @@ void normal_key(unsigned char Tecla1, int x, int y){
 			break;
 		case '9':
 			t_objeto = PEON;
+			break;
+		case '0':
+			t_objeto = TUBO;
 			break;
 	}
 	glutPostRedisplay();

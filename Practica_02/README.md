@@ -28,3 +28,16 @@ Opciones
     Tecla 7: Activar tetraedro
     Tecla 8: Activar diamante
     Tecla 9: Activar peon
+    Tecla 0: Activar tubo
+
+Funcionalidad Extra
+----------------
+    + Script Bash y Menu
+    + Objetos PLY
+    + Objeto Peon
+    + Objeto Esfera
+    + Objeto Cilindro
+    + Objeto Cono
+    + Objeto Peon
+    + Objeto Tubo
+    + Objeto Revolucion Parcial (Construir Solo Una Seccion Del Objeto)

@@ -23,3 +23,8 @@ Opciones
     Tecla 2: Activar cubo
     Tecla 3: Activar tetraedro
     Tecla 4: Activar diamante
+
+Funcionalidades Extra
+----------------------
+	+ Objeto Tetraedro
+	+ Objeto Diamante

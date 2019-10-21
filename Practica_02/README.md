@@ -40,4 +40,4 @@ Funcionalidad Extra
     + Objeto Cono
     + Objeto Peon
     + Objeto Tubo
-    + Objeto Revolucion Parcial (Construir Solo Una Seccion Del Objeto)
+    + Objeto Revolucion Parcial (Construir Solo Una Seccion Del Objeto) (Se modifica en include/model_revolution.h cambiando los valores de lAng y gAng)

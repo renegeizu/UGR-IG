@@ -8,10 +8,11 @@ Ejecutar el Proyecto
 Menu del Proyecto
 --------------------
     1. Compilar
-    2. Compilar y Ejecutar
-    3. Comprimir
-    4. Limpiar
-    5. Salir
+    2. Compilar y Ejecutar (PLY Predefinido)
+    3. Compilar y Ejecutar (Elegir PLY)
+    4. Comprimir
+    5. Limpiar
+    6. Salir
 
 Opciones
 -----------
@@ -41,3 +42,9 @@ Funcionalidad Extra
     + Objeto Peon
     + Objeto Tubo
     + Objeto Revolucion Parcial (Construir Solo Una Seccion Del Objeto) (Se modifica en include/model_revolution.h cambiando los valores de lAng y gAng)
+
+Explicaciones Extra
+----------------------
+	+ Revolucion Parcia: Construir solo una seccion del objeto. Ejemplo: medio cilindro (lAng = 0, gAng = 180). Se modifica en include/model_revolution.h, parametros lAng y gAng.
+	+ Inversion: El codigo esta preparado para dibujar el perfil de arriba hacia a abajo o a la inversa.
+	+ Los objetos por revolucion son: Cono (3), Cilindro (4), Esfera (5), Peon (9) y Tubo (0).

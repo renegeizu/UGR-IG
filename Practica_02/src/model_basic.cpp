@@ -3,12 +3,12 @@
 Cubo::Cubo(float tam){
 	vertices.resize(8);
 	
-	vertices[0].x = tam;			vertices[0].y = tam;			vertices[0].z = tam;
-	vertices[1].x = tam;			vertices[1].y = tam;			vertices[1].z = -tam;
-	vertices[2].x = tam;			vertices[2].y = -tam;		vertices[2].z = tam;
-	vertices[3].x = tam;			vertices[3].y = -tam;		vertices[3].z = -tam;
-	vertices[4].x = -tam;		vertices[4].y = tam;			vertices[4].z = tam;
-	vertices[5].x = -tam;		vertices[5].y = tam;			vertices[5].z = -tam;
+	vertices[0].x = tam;		vertices[0].y = tam;		vertices[0].z = tam;
+	vertices[1].x = tam;		vertices[1].y = tam;		vertices[1].z = -tam;
+	vertices[2].x = tam;		vertices[2].y = -tam;		vertices[2].z = tam;
+	vertices[3].x = tam;		vertices[3].y = -tam;		vertices[3].z = -tam;
+	vertices[4].x = -tam;		vertices[4].y = tam;		vertices[4].z = tam;
+	vertices[5].x = -tam;		vertices[5].y = tam;		vertices[5].z = -tam;
 	vertices[6].x = -tam;		vertices[6].y = -tam;		vertices[6].z = tam;
 	vertices[7].x = -tam;		vertices[7].y = -tam;		vertices[7].z = -tam;
 	
@@ -32,8 +32,8 @@ Piramide::Piramide(float tam, float al){
 	vertices.resize(5); 
 	
 	vertices[0].x = -tam;	vertices[0].y = 0;		vertices[0].z = tam;
-	vertices[1].x = tam;		vertices[1].y = 0;		vertices[1].z = tam;
-	vertices[2].x = tam;		vertices[2].y = 0;		vertices[2].z = -tam;
+	vertices[1].x = tam;	vertices[1].y = 0;		vertices[1].z = tam;
+	vertices[2].x = tam;	vertices[2].y = 0;		vertices[2].z = -tam;
 	vertices[3].x = -tam;	vertices[3].y = 0;		vertices[3].z = -tam;
 	vertices[4].x = 0;		vertices[4].y = al;		vertices[4].z = 0;
 
@@ -51,8 +51,8 @@ Tetraedro::Tetraedro(float tam){
 	vertices.resize(4); 
 	
 	vertices[0].x = -tam;	vertices[0].y = -tam;		vertices[0].z = tam;
-	vertices[1].x = tam;		vertices[1].y = -tam;		vertices[1].z = tam;
-	vertices[2].x = 0;		vertices[2].y = tam;			vertices[2].z = 0;
+	vertices[1].x = tam;	vertices[1].y = -tam;		vertices[1].z = tam;
+	vertices[2].x = 0;		vertices[2].y = tam;		vertices[2].z = 0;
 	vertices[3].x = 0;		vertices[3].y = -tam;		vertices[3].z = -tam;
 
 	caras.resize(4);
@@ -67,11 +67,11 @@ Diamante::Diamante(float tam, float al){
 	vertices.resize(6); 
 	
 	vertices[0].x = -tam;	vertices[0].y = 0;		vertices[0].z = tam;
-	vertices[1].x = tam;		vertices[1].y = 0;		vertices[1].z = tam;
-	vertices[2].x = tam;		vertices[2].y = 0;		vertices[2].z = -tam;
+	vertices[1].x = tam;	vertices[1].y = 0;		vertices[1].z = tam;
+	vertices[2].x = tam;	vertices[2].y = 0;		vertices[2].z = -tam;
 	vertices[3].x = -tam;	vertices[3].y = 0;		vertices[3].z = -tam;
 	vertices[4].x = 0;		vertices[4].y = al;		vertices[4].z = 0;
-	vertices[5].x = 0;		vertices[5].y = -al;		vertices[5].z = 0;
+	vertices[5].x = 0;		vertices[5].y = -al;	vertices[5].z = 0;
 
 	caras.resize(8);
 

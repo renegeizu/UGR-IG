@@ -11,7 +11,8 @@ using namespace std;
 typedef enum{
 	VERTEX_BEHIND_PLANE,
 	VERTEX_AHEAD_PLANE,
-	VERTEX_IN_PLANE} _vertex_position;
+	VERTEX_IN_PLANE
+} _vertex_position;
 
 const float COPLANE_THRESHOLD = 1e-12;
 const float MAX_FLOAT_VALUE = 1e99;

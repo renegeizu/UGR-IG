@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <GL/glut.h>
 #include <model_basic.h>
+#include <model_hierarchical.h>
 #include <model_ply.h>
 #include <model_revolution.h>
 #include <math.h>
@@ -8,7 +9,7 @@
 
 using namespace std;
 
-typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, CONO, PEON, ESFERA, CILINDRO, TETRAEDRO, DIAMANTE, TUBO} _tipo_objeto;
+typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, CONO, PEON, ESFERA, CILINDRO, TETRAEDRO, DIAMANTE, TUBO, TANQUE, WATT} _tipo_objeto;
 _tipo_objeto t_objeto = CUBO;
 _modo modo = POINTS;
 
@@ -27,6 +28,8 @@ Peon peon;
 Esfera esfera;
 Tubo tubo;
 Revolution revolution = cilindro;
+Tanque tanque;
+Watt watt;
 
 void clean_window(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -99,6 +102,12 @@ void draw_objects(){
 			revolution = tubo;
 			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
+		case TANQUE:
+			tanque.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case WATT:
+			watt.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
 	}
 }
 
@@ -164,6 +173,12 @@ void normal_key(unsigned char Tecla1, int x, int y){
 			break;
 		case '0':
 			t_objeto = TUBO;
+			break;
+		case 'T':
+			t_objeto = TANQUE;
+			break;
+		case 'W':
+			t_objeto = WATT;
 			break;
 	}
 	glutPostRedisplay();

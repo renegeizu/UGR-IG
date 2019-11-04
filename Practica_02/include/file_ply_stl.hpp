@@ -15,6 +15,6 @@ using namespace std;
 
 namespace _file_ply {
 	void read( const char * nombreArchivo, vector<float> &Vertices,vector<int> &Faces );
-} ;
+};
 
 #endif

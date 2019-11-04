@@ -45,6 +45,6 @@ Funcionalidad Extra
 
 Explicaciones Extra
 ----------------------
-	+ Revolucion Parcia: Construir solo una seccion del objeto. Ejemplo: medio cilindro (lAng = 0, gAng = 180). Se modifica en include/model_revolution.h, parametros lAng y gAng.
+	+ Revolucion Parcial: Construir solo una seccion del objeto. Ejemplo: medio cilindro (lAng = 0, gAng = 180). Se modifica en include/model_revolution.h, parametros lAng y gAng.
 	+ Inversion: El codigo esta preparado para dibujar el perfil de arriba hacia a abajo o a la inversa.
 	+ Los objetos por revolucion son: Cono (3), Cilindro (4), Esfera (5), Peon (9) y Tubo (0).

@@ -8,7 +8,6 @@ namespace _file_ply {
 		      << "error: " << msgError << endl 
 		      << "programa terminado." << endl
 		      << flush ; 
-		     
 		exit(-1);
 	}
 
@@ -101,7 +100,6 @@ namespace _file_ply {
 		   faces[base + 1] = iv1;
 		   faces[base + 2] = iv2;
 		}
-
-			return;
+		return;
 	}
 }

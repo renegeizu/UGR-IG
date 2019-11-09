@@ -24,9 +24,37 @@ void Tanque::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
 };
 
 Watt::Watt(){
+    angZ = ANGLE;
+    angY = 0;
+}
 
+Watt::Watt(float angle){
+    angZ = angle;
+    angY = 0;
 }
 
 void Watt::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+    body.setAngle(angZ);
+    colum.setAngle(angZ);
+    base.setAngle(angZ);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix(); //Cuerpo
+        glTranslatef(0, TAMFIGURA-cos(angZ*M_PI/180.0)*(TAMLARGO+DIAMETRO), 0);
+        glRotatef(angY, 0, 1, 0);
+        body.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    glPopMatrix();
+    glPushMatrix(); //Columna
+        colum.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    glPopMatrix();
+    glPushMatrix(); //Base
+        base.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    glPopMatrix();
+}
 
+void Watt::setAngle(float ang){
+    angZ = ang;
+}
+
+void Watt::setSpin(float ang){
+    angY = ang;
 }

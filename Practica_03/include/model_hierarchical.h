@@ -18,13 +18,25 @@ class Tanque: public Triangulos3D{
     protected:
         TanqueChasis chasis;
         TanqueTorreta torreta;
-        Cannon tubo;
+        TanqueCannon tubo;
 };
 
 class Watt: public Triangulos3D{
     public:
         Watt();
+        Watt(float angle);
         void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);
+        void setAngle(float ang);
+        void setSpin(float ang);
+        
+    private:
+        float angZ;
+        float angY;
+    
+    protected:
+        WattBase base;
+        WattColumna colum;
+        WattCuerpo body;
 };
 
 #endif

@@ -17,6 +17,9 @@ GLfloat Observer_distance, Observer_angle_x, Observer_angle_y;
 GLfloat Size_x, Size_y, Front_plane, Back_plane;
 int Window_x = 50, Window_y = 50, Window_width = 450, Window_high = 450;
 
+float angle = 45;
+float giro = 0;
+
 Piramide piramide(0.85, 1.3);
 Cubo cubo(0.2);
 Tetraedro tetraedro(0.2);
@@ -143,6 +146,21 @@ void normal_key(unsigned char Tecla1, int x, int y){
 			break;
 		case 'C':
 			modo = SOLID_CHESS;
+			break;
+		case 'B':
+			t_objeto = WATT;
+            watt.setAngle((angle < 81) ? ++angle : angle = 81);
+			break;
+		case 'N':
+			t_objeto = WATT;
+            watt.setAngle((angle > 9) ? --angle : angle = 9);
+			break;
+		case 'M':
+			t_objeto = WATT;
+			giro += 2*angle*M_PI/90;
+    		if(giro >= 360)
+        		giro -= 360;
+            watt.setSpin(giro);
 			break;
 		case '1':
 			t_objeto = PIRAMIDE;

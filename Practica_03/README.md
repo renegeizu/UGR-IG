@@ -30,6 +30,11 @@ Opciones
     Tecla 8: Activar diamante
     Tecla 9: Activar peon
     Tecla 0: Activar tubo
+    Tecla t: Activar Tanque
+    Tecla w: Activar Watt
+    Tecla b: Subir Brazos Watt
+    Tecla n: Bajar Brazos Watt
+    Tecla m: Girar Cabeza Watt
 
 Funcionalidad Extra
 ----------------

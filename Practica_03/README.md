@@ -35,10 +35,3 @@ Opciones
     Tecla b: Subir Brazos Watt
     Tecla n: Bajar Brazos Watt
     Tecla m: Girar Cabeza Watt
-
-Funcionalidad Extra
-----------------
-
-Explicaciones Extra
-----------------------
-

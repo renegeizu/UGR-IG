@@ -245,7 +245,7 @@ int main(int argc, char *argv[]){
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowPosition(Window_x, Window_y);
 	glutInitWindowSize(Window_width, Window_high);
-	glutCreateWindow("Practica 02");
+	glutCreateWindow("Practica 03");
 	glutDisplayFunc(draw);
 	glutReshapeFunc(change_window_size);
 	glutKeyboardFunc(normal_key);

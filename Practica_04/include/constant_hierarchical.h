@@ -1,0 +1,10 @@
+const float ANGLE = 45;
+const float ANGAPERTURA = 180;
+const float RADIO = 0.5;
+const float DIAMETRO = RADIO*2;
+const float TAM = RADIO*0.3;
+const float TAMFIGURA = 5;
+const float TAMLARGO = 3;
+const float TAMANCHO = RADIO/5;
+const float TAMBRAZO = TAMFIGURA - TAMLARGO;
+const float TAMPLY = 0.05;

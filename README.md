@@ -14,3 +14,8 @@ Practica 02
 Practica 03
 --------------
 + Modelos Jerarquicos
+
+Practica 04
+--------------
++ Luces
++ Texturas

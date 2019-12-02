@@ -35,8 +35,9 @@ Revolution revolution = cilindro;
 Tanque tanque;
 Watt watt;
 
-Light light_1 = Light(GL_LIGHT0, true, {1,1,1}, {0.5,0,0,1}, {1,0,0,1}, {1,1,1,1});
-Light light_2 = Light(GL_LIGHT1, false, {1,1,1}, {0.5,0,0,1}, {1,0,0,1}, {1,1,1,1});
+Light light_0 = Light(GL_LIGHT0, true, {1,1,1}, {0.5,0,0,1}, {1,0,0,1}, {1,1,1,1}); // Luz Direccional
+Light light_1 = Light(GL_LIGHT1, false, {1,1,1}, {0.5,0,0,1}, {1,0,0,1}, {1,1,1,1}); // Luz No Direccional
+Light light = light_0;
 
 void clean_window(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -74,9 +75,9 @@ void draw_axis(){
 
 void draw_objects(){
 	if(modo == SOLID_ILLUMINATED_FLAT || modo == SOLID_ILLUMINATED_GOURAUD){
-		light_1.enable();
+		light.enable();
 	}else{
-		light_1.disable();
+		light.disable();
 	}
 	switch (t_objeto){
 		case CUBO:

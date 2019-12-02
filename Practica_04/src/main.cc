@@ -2,6 +2,7 @@
 #include <GL/glut.h>
 #include <model_basic.h>
 #include <model_hierarchical.h>
+#include <model_light.h>
 #include <model_ply.h>
 #include <model_revolution.h>
 #include <math.h>
@@ -33,6 +34,9 @@ Tubo tubo;
 Revolution revolution = cilindro;
 Tanque tanque;
 Watt watt;
+
+Light light_1 = Light(GL_LIGHT0, true, {1,1,1}, {0.5,0,0,1}, {1,0,0,1}, {1,1,1,1});
+Light light_2 = Light(GL_LIGHT1, false, {1,1,1}, {0.5,0,0,1}, {1,0,0,1}, {1,1,1,1});
 
 void clean_window(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -69,6 +73,11 @@ void draw_axis(){
 }
 
 void draw_objects(){
+	if(modo == SOLID_ILLUMINATED_FLAT || modo == SOLID_ILLUMINATED_GOURAUD){
+		light_1.enable();
+	}else{
+		light_1.disable();
+	}
 	switch (t_objeto){
 		case CUBO:
 			cubo.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);

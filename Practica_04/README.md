@@ -37,3 +37,6 @@ Opciones
     Tecla m: Girar Cabeza Watt
     Tecla z: Iluminacion Suave
     Tecla x: Iluminacion Plana
+    Tecla a: Luz Direccional
+    Tecla s: Luz Posicional
+    Tecla u: Material

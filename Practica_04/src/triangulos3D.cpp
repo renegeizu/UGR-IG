@@ -77,6 +77,7 @@ void Triangulos3D::draw_normales_caras(){
 
 void Triangulos3D::draw_iluminacion_plana(){
 	calcular_normales();
+	material.enable();
     glShadeModel(GL_FLAT);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glBegin(GL_TRIANGLES);
@@ -91,6 +92,7 @@ void Triangulos3D::draw_iluminacion_plana(){
 
 void Triangulos3D::draw_iluminacion_suave(){
 	calcular_normales();
+	material.enable();
     glShadeModel(GL_SMOOTH);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glBegin(GL_POLYGON);
@@ -103,6 +105,10 @@ void Triangulos3D::draw_iluminacion_suave(){
         glVertex3f(vertices[caras[i]._2].x, vertices[caras[i]._2].y, vertices[caras[i]._2].z);
     }
     glEnd();
+}
+
+void Triangulos3D::setMaterial(Material &_material){
+	material = _material;
 }
 
 void Triangulos3D::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){

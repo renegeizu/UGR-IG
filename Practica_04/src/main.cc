@@ -3,6 +3,7 @@
 #include <model_basic.h>
 #include <model_hierarchical.h>
 #include <model_light.h>
+#include <model_material.h>
 #include <model_ply.h>
 #include <model_revolution.h>
 #include <math.h>
@@ -37,7 +38,13 @@ Watt watt;
 
 Light light_0 = Light(GL_LIGHT0, true, {1,1,1}, {0.5,0,0,1}, {1,0,0,1}, {1,1,1,1}); // Luz Direccional
 Light light_1 = Light(GL_LIGHT1, false, {1,1,1}, {0.5,0,0,1}, {1,0,0,1}, {1,1,1,1}); // Luz No Direccional
-Light light = light_0;
+bool light_0_state = false, light_1_state = false;
+
+Material material_1 = Material({0.25,0,0,1}, {1,0,0,1}, {1,1,1,1}, 5);
+Material material_2 = Material({0,0.25,0,1}, {0,1,0,1}, {1,1,1,1}, 7);
+Material material_3 = Material({0,0,0.50,1}, {0,0,1,1}, {1,1,1,1}, 13);
+Material material = material_1;
+int choosenMaterial = 1;
 
 void clean_window(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -74,54 +81,69 @@ void draw_axis(){
 }
 
 void draw_objects(){
-	if(modo == SOLID_ILLUMINATED_FLAT || modo == SOLID_ILLUMINATED_GOURAUD){
-		light.enable();
-	}else{
-		light.disable();
+	if(light_0_state){
+		light_0.enable();
+	}
+	if(light_1_state){
+		light_1.enable();
 	}
 	switch (t_objeto){
 		case CUBO:
+			cubo.setMaterial(material);
 			cubo.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
 			break;
 		case PIRAMIDE:
+			piramide.setMaterial(material);
 			piramide.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
 			break;
 		case OBJETO_PLY:
+			ply.setMaterial(material);
 			ply.draw(modo, 1.0, 0.6, 0.0, 0.0, 1.0, 0.3, 2);
 			break;
 		case TETRAEDRO:
+			tetraedro.setMaterial(material);
 			tetraedro.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
 		case DIAMANTE:
+			diamante.setMaterial(material);
 			diamante.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
 		case CONO:
 			revolution = cono;
+			revolution.setMaterial(material);
 			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
 		case CILINDRO:
 			revolution = cilindro;
+			revolution.setMaterial(material);
 			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
 		case PEON:
 			revolution = peon;
+			revolution.setMaterial(material);
 			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
 		case ESFERA:
 			revolution = esfera;
+			revolution.setMaterial(material);
 			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
 		case TUBO:
 			revolution = tubo;
+			revolution.setMaterial(material);
 			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
 		case TANQUE:
+			tanque.setMaterial(material);
 			tanque.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
 		case WATT:
+			watt.setMaterial(material);
 			watt.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 			break;
 	}
+	light_0.disable();
+	light_1.disable();
 }
 
 void draw(void){
@@ -213,6 +235,31 @@ void normal_key(unsigned char Tecla1, int x, int y){
 			break;
 		case 'X':
 			modo = SOLID_ILLUMINATED_GOURAUD;
+			break;
+		case 'S':
+			if(light_1_state)
+				light_1_state = false;
+			else
+				light_1_state = true;
+			break;
+		case 'A':
+			if(light_0_state)
+				light_0_state = false;
+			else
+				light_0_state = true;
+			break;
+		case 'U':
+			choosenMaterial++;
+			if(choosenMaterial == 1){
+				material = material_1;
+			}else if(choosenMaterial == 2){
+				material = material_2;
+			}else if(choosenMaterial == 3){
+				material = material_3;
+			}else{
+				choosenMaterial = 1;
+				material = material_1;
+			}
 			break;
 	}
 	glutPostRedisplay();

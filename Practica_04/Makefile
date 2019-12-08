@@ -19,7 +19,7 @@ LDFLAGS	= -lGL -lGLU -lglut -lm
 all: clean $(TARGETS)
 
 $(TARGETS):
-	$(CXX) -o $(BIN)/$@ $(SRC)/$@.cc $(CXXFLAGS) $(SRC)/puntos3D.cpp $(SRC)/triangulos3D.cpp $(SRC)/model_basic.cpp $(SRC)/model_revolution.cpp $(SRC)/model_ply.cpp $(SRC)/model_pieces.cpp $(SRC)/model_hierarchical.cpp $(SRC)/model_light.cpp $(SRC)/file_ply_stl.cc $(LDFLAGS)
+	$(CXX) -o $(BIN)/$@ $(SRC)/$@.cc $(CXXFLAGS) $(SRC)/puntos3D.cpp $(SRC)/triangulos3D.cpp $(SRC)/model_basic.cpp $(SRC)/model_revolution.cpp $(SRC)/model_ply.cpp $(SRC)/model_pieces.cpp $(SRC)/model_hierarchical.cpp $(SRC)/model_light.cpp $(SRC)/model_material.cpp $(SRC)/file_ply_stl.cc $(LDFLAGS)
 
 # Limpiador
 

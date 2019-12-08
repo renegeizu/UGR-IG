@@ -1,6 +1,7 @@
 #ifndef TRIANGULOS3D_H
 #define TRIANGULOS3D_H
 
+#include <model_material.h>
 #include <puntos3D.h>
 
 using namespace std;
@@ -18,6 +19,7 @@ class Triangulos3D: public Puntos3D{
 		void draw_normales_caras();
 		void draw_iluminacion_plana();
 		void draw_iluminacion_suave();
+		void setMaterial(Material &_material);
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);
 
 		void calcular_normales();
@@ -31,6 +33,7 @@ class Triangulos3D: public Puntos3D{
 		_vertex4f ambiente_difusa;
 		_vertex4f especular;
 		float brillo;
+		Material material;
 };
 
 #endif

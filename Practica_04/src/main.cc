@@ -39,6 +39,7 @@ Watt watt;
 Light light_0 = Light(GL_LIGHT0, true, {1,1,1}, {0.5,0,0,1}, {1,0,0,1}, {1,1,1,1}); // Luz Direccional
 Light light_1 = Light(GL_LIGHT1, false, {1,1,1}, {0.5,0,0,1}, {1,0,0,1}, {1,1,1,1}); // Luz No Direccional
 bool light_0_state = false, light_1_state = false;
+int light_0_pAngle = 0, light_0_nAngle = 0;
 
 Material material_1 = Material({0.25,0,0,1}, {1,0,0,1}, {1,1,1,1}, 5);
 Material material_2 = Material({0,0.25,0,1}, {0,1,0,1}, {1,1,1,1}, 7);
@@ -260,6 +261,14 @@ void normal_key(unsigned char Tecla1, int x, int y){
 				choosenMaterial = 1;
 				material = material_1;
 			}
+			break;
+		case 'H':
+			light_0_nAngle += 10;
+			light_0.setPosition(_vertex3f(-sin(light_0_nAngle*M_PI/180), cos(light_0_nAngle*M_PI/180), cos(light_0_pAngle*M_PI/180)));
+			break;
+		case 'G':
+			light_0_pAngle += 10;
+			light_0.setPosition(_vertex3f(sin(light_0_pAngle*M_PI/180), cos(light_0_nAngle*M_PI/180), cos(light_0_pAngle*M_PI/180)));
 			break;
 	}
 	glutPostRedisplay();

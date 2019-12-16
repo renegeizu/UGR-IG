@@ -1,4 +1,4 @@
-Practica 03 - Modelos Jerarquicos
+Practica 05 - Interaccion y Camara
 ==========================================
 
 Ejecutar el Proyecto
@@ -10,9 +10,10 @@ Menu del Proyecto
     1. Compilar
     2. Compilar y Ejecutar (PLY Predefinido)
     3. Compilar y Ejecutar (Elegir PLY)
-    4. Comprimir
-    5. Limpiar
-    6. Salir
+    4. Compilar y Ejecutar Texturas
+    5. Comprimir
+    6. Limpiar
+    7. Salir
 
 Opciones
 -----------
@@ -35,3 +36,10 @@ Opciones
     Tecla b: Subir Brazos Watt
     Tecla n: Bajar Brazos Watt
     Tecla m: Girar Cabeza Watt
+    Tecla z: Iluminacion Suave
+    Tecla x: Iluminacion Plana
+    Tecla a: Luz Direccional (ON/OFF)
+    Tecla s: Luz Posicional (ON/OFF)
+    Tecla u: Material
+    Tecla h: Mover Luz Direccional (Eje Z)
+    Tecla g: Mover Luz Direccional (Eje Y)

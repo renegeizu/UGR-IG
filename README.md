@@ -20,3 +20,8 @@ Practica 04
 + Luces
 + Texturas
 + Materiales
+
+Practica 05
+--------------
++ Interaccion
++ Camara

@@ -4,7 +4,7 @@
 
 # Guardamos los directorios necesarios
 bin=$(pwd)/bin
-data=$(pwd)/data/PLY/beethoven
+data=$(pwd)/data/beethoven
 
 # Colores para los mensajes por terminal
 nocolor='\033[0m'
@@ -57,14 +57,6 @@ _ejecucion(){
 	echo -e "\n${color}Ejecucion Finalizada${nocolor}"
 }
 
-# Procedimiento para ejecutar el proyecto de texturas
-_ejecucion_texturas(){
-	#Ejecucion del programa
-	echo -e "\n${color}Ejecutando...\n${nocolor}"
-	$bin/textures $data/caja.jpg $data/blackfriday.png
-	echo -e "\n${color}Ejecucion Finalizada${nocolor}"
-}
-
 # Menu de la Aplicacion
 _mostrar_menu(){
 	clear
@@ -74,10 +66,9 @@ _mostrar_menu(){
 	echo -e "${menu}1. Compilar${nocolor}"
 	echo -e "${menu}2. Compilar y Ejecutar (PLY Predefinido)${nocolor}"
 	echo -e "${menu}3. Compilar y Ejecutar (Elegir PLY)${nocolor}"
-	echo -e "${menu}4. Compilar y Ejecutar Texturas${nocolor}"
-	echo -e "${menu}5. Comprimir${nocolor}"
-	echo -e "${menu}6. Limpiar${nocolor}"
-	echo -e "${menu}7. Salir${nocolor}"
+	echo -e "${menu}4. Comprimir${nocolor}"
+	echo -e "${menu}5. Limpiar${nocolor}"
+	echo -e "${menu}6. Salir${nocolor}"
 	echo -e "${menu}~~~~~~~~~~~~~~~~~~~~~~~${nocolor}"
 }
 
@@ -102,13 +93,13 @@ _opcion_ply(){
 	local opcion
 	read -p "Elige la Opcion (1-7): " opcion
 	case $opcion in
-		1) clear; data=$(pwd)/data/PLY/airplane; exit 0;;
+		1) clear; data=$(pwd)/data/airplane; exit 0;;
 		2) clear; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
-		3) clear; data=$(pwd)/data/PLY/big_porsche; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
-		4) clear; data=$(pwd)/data/PLY/big_spider; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
-		5) clear; data=$(pwd)/data/PLY/f16; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
-		6) clear; data=$(pwd)/data/PLY/galleon; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
-		7) clear; data=$(pwd)/data/PLY/hydrant; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
+		3) clear; data=$(pwd)/data/big_porsche; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
+		4) clear; data=$(pwd)/data/big_spider; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
+		5) clear; data=$(pwd)/data/f16; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
+		6) clear; data=$(pwd)/data/galleon; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
+		7) clear; data=$(pwd)/data/hydrant; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
 		*) clear; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
 	esac
 }
@@ -121,10 +112,9 @@ _leer_opcion(){
 		1) clear; _directorios_creacion; _directorios_limpieza; _compilar; exit 0;;
 		2) clear; _directorios_creacion; _directorios_limpieza; _compilar; _ejecucion; exit 0;;
 		3) clear; _menu_ply; _opcion_ply; exit 0;;
-		4) clear; _directorios_creacion; _directorios_limpieza; _compilar; data=$(pwd)/data/Textures/; _ejecucion_texturas; exit 0;;
-		5) clear; _directorios_creacion; _directorios_limpieza; _empaquetar; exit 0;;
-		6) clear; _directorios_creacion; _directorios_limpieza; exit 0;;
-		7) clear; exit 0;;
+		4) clear; _directorios_creacion; _directorios_limpieza; _empaquetar; exit 0;;
+		5) clear; _directorios_creacion; _directorios_limpieza; exit 0;;
+		6) clear; exit 0;;
 		*) echo -e "\n${error}Error! Introduce una Opcion Valida${nocolor}" && sleep 1
 	esac
 }

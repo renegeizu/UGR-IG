@@ -34,6 +34,12 @@ Revolution revolution = cilindro;
 Tanque tanque;
 Watt watt;
 
+int Ancho = 450, Alto = 450;
+float factor = 1.0;
+int estadoRaton[3], xc, yc;
+bool change_view = false;
+bool color_selection = false;
+
 void clean_window(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
@@ -44,12 +50,43 @@ void change_projection(){
 	glFrustum(-Size_x, Size_x, -Size_y, Size_y, Front_plane, Back_plane);
 }
 
+void change_projection_alternative(){
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(-2, 2, -2, 2, -100, 100);
+}
+
 void change_observer(){
+	change_projection();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	glViewport(0, 0, Ancho,Alto);
 	glTranslatef(0, 0, -Observer_distance);
 	glRotatef(Observer_angle_x, 1, 0, 0);
 	glRotatef(Observer_angle_y, 0, 1, 0);
+}
+
+void change_observer_alzado(){
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glViewport((GLint) Ancho/2.0, 0, (GLint) Ancho/2.0, (GLint) Alto/2.0);
+	glRotatef(90, 0, 1, 0);
+	glScalef(1.0, factor, factor);
+}
+
+void change_observer_perfil(){
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glViewport(0, (GLint) Alto/2.0, (GLint) Ancho/2.0, (GLint) Alto/2.0);
+	glRotatef(90, 1, 0, 0);
+	glScalef(factor, 1.0, factor);
+}
+
+void change_observer_planta(){
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glViewport(0, 0, (GLint) Ancho/2.0, (GLint) Alto/2.0);
+	glScalef(factor, factor, 1.0);
 }
 
 void draw_axis(){
@@ -69,56 +106,75 @@ void draw_axis(){
 }
 
 void draw_objects(){
-	switch (t_objeto){
-		case CUBO:
-			cubo.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
-			break;
-		case PIRAMIDE:
-			piramide.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
-			break;
-		case OBJETO_PLY:
-			ply.draw(modo, 1.0, 0.6, 0.0, 0.0, 1.0, 0.3, 2);
-			break;
-		case TETRAEDRO:
-			tetraedro.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-			break;
-		case DIAMANTE:
-			diamante.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-			break;
-		case CONO:
-			revolution = cono;
-			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-			break;
-		case CILINDRO:
-			revolution = cilindro;
-			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-			break;
-		case PEON:
-			revolution = peon;
-			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-			break;
-		case ESFERA:
-			revolution = esfera;
-			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-			break;
-		case TUBO:
-			revolution = tubo;
-			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-			break;
-		case TANQUE:
-			tanque.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-			break;
-		case WATT:
-			watt.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-			break;
+	if(!color_selection){
+		switch (t_objeto){
+			case CUBO:
+				cubo.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
+				break;
+			case PIRAMIDE:
+				piramide.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
+				break;
+			case OBJETO_PLY:
+				ply.draw(modo, 1.0, 0.6, 0.0, 0.0, 1.0, 0.3, 2);
+				break;
+			case TETRAEDRO:
+				tetraedro.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+				break;
+			case DIAMANTE:
+				diamante.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+				break;
+			case CONO:
+				revolution = cono;
+				revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+				break;
+			case CILINDRO:
+				revolution = cilindro;
+				revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+				break;
+			case PEON:
+				revolution = peon;
+				revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+				break;
+			case ESFERA:
+				revolution = esfera;
+				revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+				break;
+			case TUBO:
+				revolution = tubo;
+				revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+				break;
+			case TANQUE:
+				tanque.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+				break;
+			case WATT:
+				watt.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+				break;
+		}
+	}else{
+		watt.draw(SOLID, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 	}
 }
 
 void draw(void){
 	clean_window();
-	change_observer();
-	draw_axis();
-	draw_objects();
+	if(change_view == false){
+    	change_observer();
+    	draw_axis();
+    	draw_objects();
+	}else{
+		change_projection_alternative();
+		change_observer_alzado();
+		draw_axis();
+		draw_objects();
+		change_projection_alternative();
+		change_observer_perfil();
+		draw_axis();
+		draw_objects();
+		change_projection_alternative();
+		change_observer_planta();
+		draw_axis();
+		draw_objects();
+	}
 	glutSwapBuffers();
 }
 
@@ -198,6 +254,26 @@ void normal_key(unsigned char Tecla1, int x, int y){
 		case 'W':
 			t_objeto = WATT;
 			break;
+		case 'V':
+			if(change_view){
+				change_view = false;
+			}else{
+				change_view = true;
+			}
+			break;
+		case '+':
+			factor *= 0.9;
+			break;
+		case '-':
+			factor *= 1.1;
+			break;
+		case 'S':
+			if(color_selection){
+				color_selection = false;
+			}else{
+				color_selection = true;
+			}
+			break;
 	}
 	glutPostRedisplay();
 }
@@ -226,6 +302,64 @@ void special_key(int Tecla1, int x, int y){
 	glutPostRedisplay();
 }
 
+void procesar_color(unsigned char color[3]){
+
+}
+
+void pick_color(int x, int y){
+	GLint viewport[4];
+	unsigned char pixel[3];
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	glReadBuffer(GL_BACK);
+	glReadPixels(x, viewport[3]-y, 1, 1, GL_RGB,GL_UNSIGNED_BYTE, (GLubyte *) &pixel[0]);
+	printf("Valor 'X' %d, Valor 'Y' %d, Color (%d, %d, %d) \n", x, y, pixel[0], pixel[1], pixel[2]);
+	procesar_color(pixel);
+	glutPostRedisplay();
+}
+
+void mouse_click(int boton, int estado, int x, int y){
+	if(boton == GLUT_RIGHT_BUTTON) {
+		if( estado == GLUT_DOWN) {
+			estadoRaton[2] = 1;
+			xc = x;
+			yc = y;
+		}else{
+			estadoRaton[2] = 1;
+		}
+	}
+	if(boton == GLUT_LEFT_BUTTON){
+		if(estado == GLUT_DOWN){
+			estadoRaton[2] = 2;
+			xc = x;
+			yc = y;
+			pick_color(xc, yc);
+		}
+	}
+}
+
+void getCamara (GLfloat *x, GLfloat *y){
+	*x = Observer_angle_x;
+	*y = Observer_angle_y;
+}
+
+void setCamara (GLfloat x, GLfloat y){
+	Observer_angle_x = x;
+	Observer_angle_y = y;
+}
+
+void mouse_move(int x, int y){
+	float x0, y0, xn, yn; 
+	if(estadoRaton[2] == 1){
+		getCamara(&x0, &y0);
+		yn = y0+(y-yc);
+		xn = x0-(x-xc);
+		setCamara(xn, yn);
+		xc = x;
+		yc = y;
+		glutPostRedisplay();
+	}
+}
+
 void initialize(void){
 	Size_x = 0.5;
 	Size_y = 0.5;
@@ -245,11 +379,13 @@ int main(int argc, char *argv[]){
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowPosition(Window_x, Window_y);
 	glutInitWindowSize(Window_width, Window_high);
-	glutCreateWindow("Practica 03");
+	glutCreateWindow("Practica 05");
 	glutDisplayFunc(draw);
 	glutReshapeFunc(change_window_size);
 	glutKeyboardFunc(normal_key);
 	glutSpecialFunc(special_key);
+	glutMouseFunc(mouse_click);
+    glutMotionFunc(mouse_move);
 	initialize();
 	ply.parametros(argv[1]);
 	glutMainLoop();

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-typedef enum{POINTS,EDGES,SOLID_CHESS,SOLID} _modo;
+typedef enum{POINTS, EDGES, SOLID_CHESS, SOLID} _modo;
 
 class Triangulos3D: public Puntos3D{
 	public:

@@ -35,3 +35,6 @@ Opciones
     Tecla b: Subir Brazos Watt
     Tecla n: Bajar Brazos Watt
     Tecla m: Girar Cabeza Watt
+    Tecla v: Cambio de Vista
+    Tecla +/-: Zoom en el Cambio de Vista
+    Tecla s: Seleccion por Color

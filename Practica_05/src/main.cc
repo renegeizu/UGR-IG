@@ -108,16 +108,28 @@ void draw_axis(){
 void draw_objects(){
 	switch (t_objeto){
 		case CUBO:
-			cubo.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
+			if(!color_selection){
+				cubo.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
+			}else{
+				cubo.draw_solido_seleccion();
+			}
 			break;
 		case PIRAMIDE:
-			piramide.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
+			if(!color_selection){
+				piramide.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
+			}else{
+				piramide.draw_solido_seleccion();
+			}
 			break;
 		case OBJETO_PLY:
 			ply.draw(modo, 1.0, 0.6, 0.0, 0.0, 1.0, 0.3, 2);
 			break;
 		case TETRAEDRO:
-			tetraedro.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			if(!color_selection){
+				tetraedro.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			}else{
+				tetraedro.draw_solido_seleccion();
+			}
 			break;
 		case DIAMANTE:
 			if(!color_selection){
@@ -354,6 +366,84 @@ void procesar_color(unsigned char color[3]){
 					break;
 				case 9:
 					diamante.setSelection(7);
+					break;
+			}
+		}
+		if(t_objeto == CUBO){
+			switch(color[1]){
+				case 0:
+					cubo.setSelection(0);
+					break;
+				case 1:
+					cubo.setSelection(1);
+					break;
+				case 3:
+					cubo.setSelection(2);
+					break;
+				case 4:
+					cubo.setSelection(3);
+					break;
+				case 5:
+					cubo.setSelection(4);
+					break;
+				case 6:
+					cubo.setSelection(5);
+					break;
+				case 8:
+					cubo.setSelection(6);
+					break;
+				case 9:
+					cubo.setSelection(7);
+					break;
+				case 10:
+					cubo.setSelection(8);
+					break;
+				case 11:
+					cubo.setSelection(9);
+					break;
+				case 13:
+					cubo.setSelection(10);
+					break;
+				case 14:
+					cubo.setSelection(11);
+					break;
+			}
+		}
+		if(t_objeto == TETRAEDRO){
+			switch(color[1]){
+				case 0:
+					tetraedro.setSelection(0);
+					break;
+				case 1:
+					tetraedro.setSelection(1);
+					break;
+				case 3:
+					tetraedro.setSelection(2);
+					break;
+				case 4:
+					tetraedro.setSelection(3);
+					break;
+			}
+		}
+		if(t_objeto == PIRAMIDE){
+			switch(color[1]){
+				case 0:
+					piramide.setSelection(0);
+					break;
+				case 1:
+					piramide.setSelection(1);
+					break;
+				case 3:
+					piramide.setSelection(2);
+					break;
+				case 4:
+					piramide.setSelection(3);
+					break;
+				case 5:
+					piramide.setSelection(4);
+					break;
+				case 6:
+					piramide.setSelection(5);
 					break;
 			}
 		}

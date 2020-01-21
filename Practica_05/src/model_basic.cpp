@@ -28,6 +28,36 @@ Cubo::Cubo(float tam){
 	caras[11]._0 = 3;			caras[11]._1 = 2;			caras[11]._2 = 6;
 }
 
+void Cubo::setSelection(int selectTriangle){
+	if(selectTriangle >= 0 && selectTriangle < caras.size()){
+		seleccion[selectTriangle] = !seleccion[selectTriangle];
+	}
+}
+
+void Cubo::resetSelection(){
+	for(int i = 0; i < caras.size(); i++){
+		seleccion[i] = false;
+	}
+}
+
+void Cubo::draw_solido_seleccion(){
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glBegin(GL_TRIANGLES);
+	float b = 0.0;
+	for(int i = 0; i < caras.size(); i++){
+		if(seleccion[i]){
+			glColor3f(0.1, b, 0.1);
+		}else{
+			glColor3f(0.6, b, 0.6);
+		}
+		glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
+		glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
+		glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
+		b += 0.005;
+	}
+	glEnd();
+}
+
 Piramide::Piramide(float tam, float al){
 	vertices.resize(5); 
 	
@@ -47,6 +77,36 @@ Piramide::Piramide(float tam, float al){
 	caras[5]._0 = 3;		caras[5]._1 = 2;		caras[5]._2 = 1;
 }
 
+void Piramide::setSelection(int selectTriangle){
+	if(selectTriangle >= 0 && selectTriangle < caras.size()){
+		seleccion[selectTriangle] = !seleccion[selectTriangle];
+	}
+}
+
+void Piramide::resetSelection(){
+	for(int i = 0; i < caras.size(); i++){
+		seleccion[i] = false;
+	}
+}
+
+void Piramide::draw_solido_seleccion(){
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glBegin(GL_TRIANGLES);
+	float b = 0.0;
+	for(int i = 0; i < caras.size(); i++){
+		if(seleccion[i]){
+			glColor3f(0.2, b, 0.2);
+		}else{
+			glColor3f(0.7, b, 0.7);
+		}
+		glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
+		glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
+		glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
+		b += 0.005;
+	}
+	glEnd();
+}
+
 Tetraedro::Tetraedro(float tam){
 	vertices.resize(4); 
 	
@@ -61,6 +121,36 @@ Tetraedro::Tetraedro(float tam){
 	caras[1]._0 = 2;		caras[1]._1 = 1;		caras[1]._2 = 3;
 	caras[2]._0 = 3;		caras[2]._1 = 0;		caras[2]._2 = 2;
 	caras[3]._0 = 0;		caras[3]._1 = 3;		caras[3]._2 = 1;
+}
+
+void Tetraedro::setSelection(int selectTriangle){
+	if(selectTriangle >= 0 && selectTriangle < caras.size()){
+		seleccion[selectTriangle] = !seleccion[selectTriangle];
+	}
+}
+
+void Tetraedro::resetSelection(){
+	for(int i = 0; i < caras.size(); i++){
+		seleccion[i] = false;
+	}
+}
+
+void Tetraedro::draw_solido_seleccion(){
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glBegin(GL_TRIANGLES);
+	float b = 0.0;
+	for(int i = 0; i < caras.size(); i++){
+		if(seleccion[i]){
+			glColor3f(0.3, b, 0.3);
+		}else{
+			glColor3f(0.8, b, 0.8);
+		}
+		glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
+		glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
+		glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
+		b += 0.005;
+	}
+	glEnd();
 }
 
 Diamante::Diamante(float tam, float al){
@@ -86,13 +176,13 @@ Diamante::Diamante(float tam, float al){
 }
 
 void Diamante::setSelection(int selectTriangle){
-	if(selectTriangle >= 0 && selectTriangle <= 7){
+	if(selectTriangle >= 0 && selectTriangle < caras.size()){
 		seleccion[selectTriangle] = !seleccion[selectTriangle];
 	}
 }
 
 void Diamante::resetSelection(){
-	for(int i = 0; i < 8; i++){
+	for(int i = 0; i < caras.size(); i++){
 		seleccion[i] = false;
 	}
 }
@@ -103,9 +193,9 @@ void Diamante::draw_solido_seleccion(){
 	float b = 0.0;
 	for(int i = 0; i < caras.size(); i++){
 		if(seleccion[i]){
-			glColor3f(0.3, b, 0.3);
+			glColor3f(0.4, b, 0.4);
 		}else{
-			glColor3f(0.7, b, 0.7);
+			glColor3f(0.9, b, 0.9);
 		}
 		glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
 		glVertex3fv((GLfloat *) &vertices[caras[i]._1]);

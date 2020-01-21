@@ -23,6 +23,11 @@ class Tetraedro: public Triangulos3D{
 class Diamante: public Triangulos3D{
 	public:
 		Diamante(float tam = 0.5, float al = 0.75);
+		void setSelection(int selectTriangle);
+		void resetSelection();
+		void draw_solido_seleccion();
+	private:
+		bool seleccion[8] = {false, false, false, false, false, false, false, false};
 };
 
 #endif

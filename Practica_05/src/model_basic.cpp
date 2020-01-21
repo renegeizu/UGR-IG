@@ -84,3 +84,33 @@ Diamante::Diamante(float tam, float al){
 	caras[6]._0 = 1;		caras[6]._1 = 2;		caras[6]._2 = 5;
 	caras[7]._0 = 0;		caras[7]._1 = 1;		caras[7]._2 = 5;
 }
+
+void Diamante::setSelection(int selectTriangle){
+	if(selectTriangle >= 0 && selectTriangle <= 7){
+		seleccion[selectTriangle] = !seleccion[selectTriangle];
+	}
+}
+
+void Diamante::resetSelection(){
+	for(int i = 0; i < 8; i++){
+		seleccion[i] = false;
+	}
+}
+
+void Diamante::draw_solido_seleccion(){
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glBegin(GL_TRIANGLES);
+	float b = 0.0;
+	for(int i = 0; i < caras.size(); i++){
+		if(seleccion[i]){
+			glColor3f(0.3, b, 0.3);
+		}else{
+			glColor3f(0.7, b, 0.7);
+		}
+		glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
+		glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
+		glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
+		b += 0.005;
+	}
+	glEnd();
+}

@@ -106,52 +106,56 @@ void draw_axis(){
 }
 
 void draw_objects(){
-	if(!color_selection){
-		switch (t_objeto){
-			case CUBO:
-				cubo.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
-				break;
-			case PIRAMIDE:
-				piramide.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
-				break;
-			case OBJETO_PLY:
-				ply.draw(modo, 1.0, 0.6, 0.0, 0.0, 1.0, 0.3, 2);
-				break;
-			case TETRAEDRO:
-				tetraedro.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-				break;
-			case DIAMANTE:
+	switch (t_objeto){
+		case CUBO:
+			cubo.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
+			break;
+		case PIRAMIDE:
+			piramide.draw(modo, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2);
+			break;
+		case OBJETO_PLY:
+			ply.draw(modo, 1.0, 0.6, 0.0, 0.0, 1.0, 0.3, 2);
+			break;
+		case TETRAEDRO:
+			tetraedro.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case DIAMANTE:
+			if(!color_selection){
 				diamante.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-				break;
-			case CONO:
-				revolution = cono;
-				revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-				break;
-			case CILINDRO:
-				revolution = cilindro;
-				revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-				break;
-			case PEON:
-				revolution = peon;
-				revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-				break;
-			case ESFERA:
-				revolution = esfera;
-				revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-				break;
-			case TUBO:
-				revolution = tubo;
-				revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-				break;
-			case TANQUE:
-				tanque.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
-				break;
-			case WATT:
+			}else{
+				diamante.draw_solido_seleccion();
+			}
+			break;
+		case CONO:
+			revolution = cono;
+			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case CILINDRO:
+			revolution = cilindro;
+			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case PEON:
+			revolution = peon;
+			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case ESFERA:
+			revolution = esfera;
+			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case TUBO:
+			revolution = tubo;
+			revolution.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case TANQUE:
+			tanque.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			break;
+		case WATT:
+			if(!color_selection){
 				watt.draw(modo, 1, 0.5, 1, 0.2, 0.7, 0.4, 2);
-				break;
-		}
-	}else{
-		watt.draw(SOLID, 1, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			}else{
+				watt.draw(SOLID, 1, 0.5, 1, 0.2, 0.7, 0.4, 2);
+			}
+			break;
 	}
 }
 
@@ -304,29 +308,60 @@ void special_key(int Tecla1, int x, int y){
 
 void procesar_color(unsigned char color[3]){
 	if(color_selection){
-		if(color[2] == 255){
-			if(color[0] == 128){
-				watt.unselectPiece(1);
+		if(t_objeto == WATT){
+			if(color[2] == 255){
+				if(color[0] == 128){
+					watt.unselectPiece(1);
+				}else{
+					watt.selectPiece(1);
+				}
+			}else if(color[2] == 254){
+				if(color[0] == 128){
+					watt.unselectPiece(2);
+				}else{
+					watt.selectPiece(2);
+				}
+			}else if(color[2] == 253){
+				if(color[0] == 128){
+					watt.unselectPiece(3);
 			}else{
-				watt.selectPiece(1);
+					watt.selectPiece(3);
+				}
 			}
-		}else if(color[2] == 254){
-			if(color[0] == 128){
-				watt.unselectPiece(2);
-			}else{
-				watt.selectPiece(2);
-			}
-		}else if(color[2] == 253){
-			if(color[0] == 128){
-				watt.unselectPiece(3);
-		}else{
-				watt.selectPiece(3);
+		}
+		if(t_objeto == DIAMANTE){
+			switch(color[1]){
+				case 0:
+					diamante.setSelection(0);
+					break;
+				case 1:
+					diamante.setSelection(1);
+					break;
+				case 3:
+					diamante.setSelection(2);
+					break;
+				case 4:
+					diamante.setSelection(3);
+					break;
+				case 5:
+					diamante.setSelection(4);
+					break;
+				case 6:
+					diamante.setSelection(5);
+					break;
+				case 8:
+					diamante.setSelection(6);
+					break;
+				case 9:
+					diamante.setSelection(7);
+					break;
 			}
 		}
 	}else{
 		watt.unselectPiece(1);
 		watt.unselectPiece(2);
 		watt.unselectPiece(3);
+		diamante.resetSelection();
 	}
 }
 

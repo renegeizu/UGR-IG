@@ -147,11 +147,11 @@ void draw_objects(){
 				tanque.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 				break;
 			case WATT:
-				watt.draw(SOLID, 1, 0.5, 1, 0.2, 0.7, 0.4, 2);
+				watt.draw(modo, 1, 0.5, 1, 0.2, 0.7, 0.4, 2);
 				break;
 		}
 	}else{
-		watt.draw(SOLID, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+		watt.draw(SOLID, 1, 0.5, 1, 0.2, 0.7, 0.4, 2);
 	}
 }
 
@@ -303,7 +303,7 @@ void special_key(int Tecla1, int x, int y){
 }
 
 void procesar_color(unsigned char color[3]){
-	if(t_objeto == WATT){
+	if(color_selection){
 		if(color[2] == 255){
 			if(color[0] == 128){
 				watt.unselectPiece(1);
@@ -319,10 +319,14 @@ void procesar_color(unsigned char color[3]){
 		}else if(color[2] == 253){
 			if(color[0] == 128){
 				watt.unselectPiece(3);
-			}else{
+		}else{
 				watt.selectPiece(3);
 			}
 		}
+	}else{
+		watt.unselectPiece(1);
+		watt.unselectPiece(2);
+		watt.unselectPiece(3);
 	}
 }
 

@@ -41,13 +41,25 @@ void Watt::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, fl
     glPushMatrix(); //Cuerpo
         glTranslatef(0, TAMFIGURA-cos(angZ*M_PI/180.0)*(TAMLARGO+DIAMETRO), 0);
         glRotatef(angY, 0, 1, 0);
-        body.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+        if(pieces[0]){
+            body.draw(modo, r1-0.5, g1, b1, r2, g2, b2, grosor);
+        }else{
+            body.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+        }
     glPopMatrix();
     glPushMatrix(); //Columna
-        colum.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+        if(pieces[1]){
+            colum.draw(modo, r1-0.5, g1, b1-0.005, r2, g2, b2, grosor);
+        }else{
+            colum.draw(modo, r1, g1, b1-0.005, r2, g2, b2, grosor);
+        }
     glPopMatrix();
     glPushMatrix(); //Base
-        base.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+        if(pieces[2]){
+            base.draw(modo, r1-0.5, g1, b1-0.007, r2, g2, b2, grosor);
+        }else{
+            base.draw(modo, r1, g1, b1-0.007, r2, g2, b2, grosor);
+        }
     glPopMatrix();
 }
 
@@ -57,4 +69,24 @@ void Watt::setAngle(float ang){
 
 void Watt::setSpin(float ang){
     angY = ang;
+}
+
+void Watt::selectPiece(int piece){
+    if(piece == 1){
+        pieces[0] = true;
+    }else if(piece == 2){
+        pieces[1] = true;
+    }else{
+        pieces[2] = true;
+    }
+}
+
+void Watt::unselectPiece(int piece){
+    if(piece == 1){
+        pieces[0] = false;
+    }else if(piece == 2){
+        pieces[1] = false;
+    }else{
+        pieces[2] = false;
+    }
 }

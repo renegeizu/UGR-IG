@@ -10,8 +10,8 @@
 using namespace std;
 
 typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, CONO, PEON, ESFERA, CILINDRO, TETRAEDRO, DIAMANTE, TUBO, TANQUE, WATT} _tipo_objeto;
-_tipo_objeto t_objeto = CUBO;
-_modo modo = POINTS;
+_tipo_objeto t_objeto = WATT;
+_modo modo = SOLID;
 
 GLfloat Observer_distance, Observer_angle_x, Observer_angle_y;
 GLfloat Size_x, Size_y, Front_plane, Back_plane;
@@ -147,7 +147,7 @@ void draw_objects(){
 				tanque.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
 				break;
 			case WATT:
-				watt.draw(modo, 0.2, 0.5, 1, 0.2, 0.7, 0.4, 2);
+				watt.draw(SOLID, 1, 0.5, 1, 0.2, 0.7, 0.4, 2);
 				break;
 		}
 	}else{
@@ -303,7 +303,27 @@ void special_key(int Tecla1, int x, int y){
 }
 
 void procesar_color(unsigned char color[3]){
-
+	if(t_objeto == WATT){
+		if(color[2] == 255){
+			if(color[0] == 128){
+				watt.unselectPiece(1);
+			}else{
+				watt.selectPiece(1);
+			}
+		}else if(color[2] == 254){
+			if(color[0] == 128){
+				watt.unselectPiece(2);
+			}else{
+				watt.selectPiece(2);
+			}
+		}else if(color[2] == 253){
+			if(color[0] == 128){
+				watt.unselectPiece(3);
+			}else{
+				watt.selectPiece(3);
+			}
+		}
+	}
 }
 
 void pick_color(int x, int y){

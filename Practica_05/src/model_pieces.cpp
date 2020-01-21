@@ -84,22 +84,14 @@ void TanqueCannon::draw(_modo modo, float r1, float g1, float b1, float r2, floa
 
 WattBola::WattBola(){
     angZ = ANGLE;
-    objPly.parametros("data/beethoven");
 }
 
 WattBola::WattBola(float angle){
     angZ = angle;
-    objPly.parametros("data/beethoven");
 }
 
 void WattBola::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
     glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-        glTranslatef(0, -RADIO/2, 0);
-        glRotatef(ANGAPERTURA, 0, 0, 1);
-        glScalef(TAMPLY, TAMPLY, TAMPLY);
-        objPly.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-    glPopMatrix();
     glPushMatrix();
         glTranslatef(0, RADIO, 0);
         glScalef(RADIO, RADIO, RADIO);

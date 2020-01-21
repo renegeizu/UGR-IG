@@ -53,7 +53,6 @@ class WattBola: public Triangulos3D{
 
     protected:
         Esfera esfera;
-        ModelPly objPly;
 };
 
 class WattLanza: public Triangulos3D{
